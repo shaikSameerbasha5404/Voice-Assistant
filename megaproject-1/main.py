@@ -1,4 +1,4 @@
-import SpeechRecognition as sr
+import speech_recognition as sr
 import webbrowser
 import pyttsx3
 
