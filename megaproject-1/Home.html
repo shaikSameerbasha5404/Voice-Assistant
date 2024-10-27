@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Voice Assistant Interface</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Assistant Interface -->
+        <h1>Jarvis</h1>
+        
+        <!-- Display for User's Spoken Words -->
+        <div id="user-text" class="display-box">
+            <p>Your Command: <span id="user-command">...</span></p>
+        </div>
+        
+        <!-- Display for Assistant's Response -->
+        <div id="assistant-response" class="display-box">
+            <p>Assistant's Response: <span id="response-text">Listening...</span></p>
+        </div>
+        
+        <!-- Voice Control Button -->
+        <button id="listen-btn" class="listen-btn">🎤 Tap to Speak</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
