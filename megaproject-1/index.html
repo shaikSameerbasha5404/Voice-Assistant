@@ -8,6 +8,7 @@
 
     <link rel="shortcut icon" href="assets/img/logo.ico" type="image/x-icon">
 
+
     <!-- Bootsrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -22,6 +23,13 @@
     <link rel="stylesheet" href="assets/vendore/texllate/animate.css">
 
     <link rel="stylesheet" href="style.css">
+    <script>
+        function startAssistant() {
+            fetch('/start_voice_assistant')
+                .then(response => response.json())
+                .then(data => alert(data.message));
+        }
+    </script>
 
 </head>
 
@@ -266,7 +274,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center align-items-center">
-                        <h1 id="WishMessage" class="text-center text-light text mt-4 siri-message">Initializing...</h1>
+                        <h1 id="WishMessage" class="text-center text-light text mt-4 siri-message">{{ result }}</h1>
                     </div>
                 </div>
 

@@ -1,16 +1,17 @@
+# main.py
 import speech_recognition as sr
 import webbrowser
 import pyttsx3
 
-
-
+# Initialize recognizer and text-to-speech engine
 recognozer = sr.Recognizer()
 engine = pyttsx3.init()
 
 def speak(text):
     engine.say(text)
     engine.runAndWait()
-def processCommand(c):
+
+def process_command(c):
     print(c)
     if "open google" in c.lower():
         webbrowser.open("https://google.com")
@@ -21,32 +22,25 @@ def processCommand(c):
     elif "open linkedin" in c.lower():
         webbrowser.open("https://linkedin.com")
 
-if __name__ == "__main__":
-    speak("Initializing jarvis....")
+def start_voice_assistant():
+    speak("Initializing Jarvis....")
     while True:
-        # Listen for thw wake word "jarvis"
-        # obtain audio from the microphone
-        r =sr.Recognizer()
-        
-
-
         print("Recognizing.....")
         try:
             with sr.Microphone() as source:
                 print("Listening.....")
-                audio = r.listen(source,timeout=2,phrase_time_limit=1)
-            word = r.recognize_google(audio)
+                audio = recognozer.listen(source, timeout=2, phrase_time_limit=1)
+            word = recognozer.recognize_google(audio)
 
-            if(word.lower()=="jarvis"):
-                speak("yaa")
+            if word.lower() == "jarvis":
+                speak("Yaa")
                 with sr.Microphone() as source:
                     speak("Darling Activated.....")
                     print("Darling Active.....")
-                    audio = r.listen(source)
-                    command = r.recognize_google(audio)
+                    audio = recognozer.listen(source)
+                    command = recognozer.recognize_google(audio)
 
-                    processCommand(command)
-
+                    process_command(command)
 
         except Exception as e:
             print("Error; {0}".format(e))
