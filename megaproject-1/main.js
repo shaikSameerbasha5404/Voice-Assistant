@@ -107,7 +107,7 @@ $(document).ready(function () {
     });
     
 
-    // enter press event handler on chat box
+    // enter press event  handler on chat box
     $("#chatbox").keypress(function (e) {
         key = e.which;
         if (key == 13) {
