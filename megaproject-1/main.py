@@ -4,45 +4,53 @@ import webbrowser
 import pyttsx3
 
 # Initialize recognizer and text-to-speech engine
-recognozer = sr.Recognizer()
+recognizer = sr.Recognizer()
 engine = pyttsx3.init()
 
 def speak(text):
     engine.say(text)
     engine.runAndWait()
 
-def process_command(c):
-    print(c)
-    if "open google" in c.lower():
+def process_command(command):
+    print(f"Command received: {command}")
+    command = command.lower()
+    if "open google" in command:
         webbrowser.open("https://google.com")
-    elif "open youtube" in c.lower():
+    elif "open youtube" in command:
         webbrowser.open("https://youtube.com")
-    elif "open insta" in c.lower():
+    elif "open instagram" in command:
         webbrowser.open("https://instagram.com")
-    elif "open linkedin" in c.lower():
+    elif "open linkedin" in command:
         webbrowser.open("https://linkedin.com")
+    elif "exit" in command:
+        speak("Shutting down. Goodbye!")
+        exit()
 
 def start_voice_assistant():
-    speak("Initializing Jarvis....")
+    speak("Initializing Jarvis...")
     while True:
-        print("Recognizing.....")
+        print("Awaiting activation command...")
         try:
             with sr.Microphone() as source:
-                print("Listening.....")
-                audio = recognozer.listen(source, timeout=2, phrase_time_limit=1)
-            word = recognozer.recognize_google(audio)
+                print("Listening for 'Jarvis'...")
+                audio = recognizer.listen(source, timeout=5, phrase_time_limit=3)
+            word = recognizer.recognize_google(audio)
 
             if word.lower() == "jarvis":
-                speak("Yaa")
+                speak("Yes, how can I assist you?")
                 with sr.Microphone() as source:
-                    speak("Darling Activated.....")
-                    print("Darling Active.....")
-                    audio = recognozer.listen(source)
-                    command = recognozer.recognize_google(audio)
-
+                    print("Listening for your command...")
+                    audio = recognizer.listen(source, timeout=5, phrase_time_limit=5)
+                    command = recognizer.recognize_google(audio)
                     process_command(command)
 
-
-
+        except sr.UnknownValueError:
+            print("Could not understand the audio.")
+        except sr.RequestError:
+            print("Could not request results; check your network connection.")
         except Exception as e:
-            print("Error; {0}".format(e))
+            print(f"Error: {e}")
+
+# Start the voice assistant
+if __name__ == "__main__":
+    start_voice_assistant()
