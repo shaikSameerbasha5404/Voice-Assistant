@@ -46,6 +46,7 @@ if __name__ == "__main__":
                     command = r.recognize_google(audio)
 
                     processCommand(command)
+                    
 
 
         except Exception as e:
